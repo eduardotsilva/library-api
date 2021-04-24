@@ -1,13 +1,18 @@
 package com.eduardo.libraryapi.api.resource;
 
 import com.eduardo.libraryapi.api.dto.BookDTO;
+import com.eduardo.libraryapi.api.model.entity.Book;
+import com.eduardo.libraryapi.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -30,14 +35,20 @@ public class BookControllerTest {
     @Autowired
     MockMvc mvc;
 
+    @MockBean
+    BookService service;
+
     @Test
     @DisplayName("DEVE criar uma livro com sucesso.")
 
     public void createBookTest() throws Exception{
 
-        BookDTO bookDTO = BookDTO.builder().author("Arthur").title("As aventuras").isbn("001").build();
+        BookDTO dto = BookDTO.builder().author("Arthur").title("As aventuras").isbn("001").build();
+        Book savedBook = Book.builder().id(10L).author("Arthur").title("As aventuras").isbn("001").build();
 
-        String json = new ObjectMapper().writeValueAsString(null);
+        BDDMockito.given(service.save(Mockito.any(Book.class))).willReturn(savedBook);
+
+        String json = new ObjectMapper().writeValueAsString(dto);
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .post(BOOK_API)
@@ -49,9 +60,9 @@ public class BookControllerTest {
                 .perform(request)
                 .andExpect(status().isCreated() )
                 .andExpect(jsonPath("id").isNotEmpty())
-                .andExpect( jsonPath("title").value(bookDTO.getTitle()) )
-                .andExpect(jsonPath("author").value( bookDTO.getAuthor()))
-                .andExpect(jsonPath("isbn").value(bookDTO.getIsbn()))
+                .andExpect( jsonPath("title").value(dto.getTitle()) )
+                .andExpect(jsonPath("author").value( dto.getAuthor()))
+                .andExpect(jsonPath("isbn").value(dto.getIsbn()))
 
                 ;
 
