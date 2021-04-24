@@ -3,6 +3,7 @@ package com.eduardo.libraryapi.api.resource;
 import com.eduardo.libraryapi.api.dto.BookDTO;
 import com.eduardo.libraryapi.api.exception.ApiErros;
 import com.eduardo.libraryapi.api.model.entity.Book;
+import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,13 @@ public class BookController {
 
         return new ApiErros(bindingResult);
 
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErros handlerBusinessException(BusinessException ex) {
+
+        return new ApiErros(ex);
     }
 
 }
