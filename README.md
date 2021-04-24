@@ -8,7 +8,7 @@
  :: Spring Boot ::        (v2.4.5.RELEASE)
 ```
 
-# Projeto Fullstack com Spring Boot 2 e Angular 11
+# library-api
 
 ## Conteúdo
 1. Criar aplicações do zero com Spring Boot:heavy_check_mark:
