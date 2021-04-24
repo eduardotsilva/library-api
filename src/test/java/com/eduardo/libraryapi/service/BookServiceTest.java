@@ -116,6 +116,33 @@ public class BookServiceTest {
         assertThat(book.isPresent()).isFalse();
 
     }
+    @Test
+    @DisplayName("DEVE deletar um livro")
+    public void deleteBookTest(){
+        //cenário
+        Long id = 1L;
+        Book book = createValidBook();
+        book.setId(id);
+
+        //execução
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> service.delete(book));
+
+
+        //verificações
+        Mockito.verify(repository,Mockito.times(1)).delete(book);
+
+
+    }
+    @Test
+    @DisplayName("DEVE ocorrer erro ao tentar deletar um livro inexistente")
+    public void deleteInvalidBookTest(){
+        Book book = new Book();
+
+        org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,() -> service.delete(book));
+
+        Mockito.verify(repository, Mockito.never()).delete(book);
+
+    }
 
 
 }
