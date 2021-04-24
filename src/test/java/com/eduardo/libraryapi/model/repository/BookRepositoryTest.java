@@ -41,11 +41,6 @@ public class BookRepositoryTest {
         assertThat(exists).isTrue();
     }
 
-    private Book createNewBook(String isbn) {
-        return Book.builder().title("Aventuras").author("Fulano").isbn(isbn).build();
-    }
-
-
     @Test
     @DisplayName("DEVE retornar FALSE quando não existir um livro na base com ibs informado")
     public void returnFalseWhenIsbnDoesntExists(){
@@ -75,5 +70,38 @@ public class BookRepositoryTest {
 
 
     }
+
+    @Test
+    @DisplayName("DEVE salvar um livro")
+    public void saveBookTest(){
+        String isbn  = "123";
+        Book book = createNewBook(isbn);
+        Book savedBook = repository.save(book);
+
+        assertThat(savedBook.getId()).isNotNull();
+
+    }
+
+    @Test
+    @DisplayName("DEVE deletar um livro")
+    public void deleteBookTest(){
+        //cenario
+        String isbn  = "123";
+        Book book = createNewBook(isbn);
+        testEntityManager.persist(book);
+
+        Book foundBook = testEntityManager.find(Book.class, book.getId());
+        repository.delete(foundBook);
+
+        Book deletedBook = testEntityManager.find(Book.class, book.getId());
+        assertThat(deletedBook).isNull();
+
+    }
+
+    private Book createNewBook(String isbn) {
+        return Book.builder().title("Aventuras").author("Fulano").isbn(isbn).build();
+    }
+
+
 
 }
