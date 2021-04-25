@@ -1,6 +1,6 @@
 package com.eduardo.libraryapi.service;
 
-import com.eduardo.libraryapi.api.model.entity.Book;
+import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.repository.BookRepository;
 import com.eduardo.libraryapi.service.impl.BookServiceImpl;

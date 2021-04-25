@@ -1,6 +1,6 @@
 package com.eduardo.libraryapi.service.impl;
 
-import com.eduardo.libraryapi.api.model.entity.Book;
+import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.repository.BookRepository;
 import com.eduardo.libraryapi.service.BookService;
@@ -61,5 +61,10 @@ public class BookServiceImpl implements BookService {
                         .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING )
         )               ;
         return repository.findAll(example, pageRequest);
+    }
+
+    @Override
+    public Optional<Book> getBookByIsbn(String isbn) {
+        return Optional.empty();
     }
 }

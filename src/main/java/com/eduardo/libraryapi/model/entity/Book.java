@@ -1,4 +1,4 @@
-package com.eduardo.libraryapi.api.model.entity;
+package com.eduardo.libraryapi.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

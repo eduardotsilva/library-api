@@ -1,6 +1,6 @@
 package com.eduardo.libraryapi.model.repository;
 
-import com.eduardo.libraryapi.api.model.entity.Book;
+import com.eduardo.libraryapi.model.entity.Book;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,7 +1,7 @@
 package com.eduardo.libraryapi.api.resource;
 
 import com.eduardo.libraryapi.api.dto.BookDTO;
-import com.eduardo.libraryapi.api.model.entity.Book;
+import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
-@WebMvcTest
+@WebMvcTest(controllers = BookController.class)
 @AutoConfigureMockMvc
 public class BookControllerTest {
 
