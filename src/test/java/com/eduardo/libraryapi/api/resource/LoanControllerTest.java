@@ -1,6 +1,7 @@
 package com.eduardo.libraryapi.api.resource;
 
 import com.eduardo.libraryapi.api.dto.LoanDTO;
+import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
@@ -108,5 +109,37 @@ public class LoanControllerTest {
         ;
     }
 
+    @Test
+    @DisplayName("DEVE retornar erro ao tentar fazer um empréstimo de um livro já emprestado")
+    public void LoanedBookErrorOnCreateLoanTest() throws Exception{
+
+        //cenário
+        LoanDTO dto = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        String json = new ObjectMapper().writeValueAsString(dto);
+
+        Book book = Book.builder().id(1L).isbn("123").build();
+
+        BDDMockito.given( bookService.getBookByIsbn("123") )
+                .willReturn( Optional.of(book)  );
+
+        BDDMockito.given( loanService.save(Mockito.any(Loan.class)))
+                .willThrow(new BusinessException("Livro já emprestado"));
+
+        //execução
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(LOAN_API)
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        //verificação
+        mvc
+                .perform(request)
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("erros", Matchers.hasSize(1)))
+                .andExpect(jsonPath("erros[0]").value("Livro já emprestado"))
+        ;
+    }
 
 }
