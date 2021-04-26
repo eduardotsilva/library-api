@@ -1,6 +1,7 @@
 package com.eduardo.libraryapi.service;
 
 
+import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.model.repository.LoanRepository;
@@ -17,6 +18,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -50,6 +54,7 @@ public class LoanServiceTest {
                 .loanDate(LocalDate.now())
                 .build();
 
+        when(repository.existsByBookAndNotReturned(book)).thenReturn(false);
         Mockito.when(repository.save(savingLoan)).thenReturn(savedLoan);
 
         Loan loan = service.save(savingLoan);
@@ -62,5 +67,31 @@ public class LoanServiceTest {
 
 
     }
+
+    @Test
+    @DisplayName("DEVE lançar erro de negócio ao salvar um empréstimo com livro já emprestado")
+    public void loanedBookSaveTest(){
+
+        Book book = Book.builder().id(1L).build();
+
+        Loan savingLoan = Loan.builder()
+                .book(book)
+                .customer("Fulano")
+                .loanDate(LocalDate.now())
+                .build();
+
+        when(repository.existsByBookAndNotReturned(book)).thenReturn(true);
+
+        Throwable exception = catchThrowable(() -> service.save(savingLoan));
+
+        assertThat(exception)
+                .isInstanceOf(BusinessException.class)
+                .hasMessage("Livro já emprestado");
+
+        Mockito.verify(repository, never()).save(savingLoan);
+
+    }
+
+
 
 }
