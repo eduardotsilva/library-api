@@ -1,6 +1,7 @@
 package com.eduardo.libraryapi.api.resource;
 
 import com.eduardo.libraryapi.api.dto.LoanDTO;
+import com.eduardo.libraryapi.api.dto.ReturnedLoanDTO;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
@@ -38,5 +39,11 @@ public class LoanController {
         return entity.getId();
     }
 
-
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void returnBook(@PathVariable Long id, @RequestBody ReturnedLoanDTO dto){
+        Loan loan =  service.getById(id).get();
+        loan.setReturned(dto.getReturned());
+        service.update(loan);
+    }
 }
