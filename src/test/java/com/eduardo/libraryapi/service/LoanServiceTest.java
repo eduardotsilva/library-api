@@ -1,11 +1,13 @@
 package com.eduardo.libraryapi.service;
 
 
+import com.eduardo.libraryapi.api.dto.LoanFilterDTO;
 import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.model.repository.LoanRepository;
 import com.eduardo.libraryapi.service.impl.LoanServiceImpl;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,10 +15,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -135,6 +143,44 @@ public class LoanServiceTest {
 
 
     }
+
+
+    @Test
+    @DisplayName("DEVE filtrar empréstimos pelas propriedades")
+    public void findLoanTest(){
+        //cenário
+
+        LoanFilterDTO filterDTO = LoanFilterDTO.builder().customer("Fulano").isbn("321").build();
+
+        Loan loan = createLoan();
+        loan.setId(1L);
+
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        List<Loan> lista = Arrays.asList(loan);
+
+        Page<Loan> page = new PageImpl<Loan>(lista, pageRequest, lista.size());
+
+        Mockito.when(repository.findByBookIsbnOrCustomer(
+                Mockito.anyString(),
+                Mockito.anyString(),
+                Mockito.any(PageRequest.class))
+                )
+                .thenReturn(page);
+
+        //execução
+        Page<Loan> result = service.find(filterDTO, pageRequest);
+
+        //verificações
+        AssertionsForClassTypes.assertThat(result.getTotalElements()).isEqualTo(1);
+        AssertionsForClassTypes.assertThat(result.getContent()).isEqualTo(lista);
+        AssertionsForClassTypes.assertThat(result.getPageable().getPageNumber()).isEqualTo(0);
+        AssertionsForClassTypes.assertThat(result.getPageable().getPageSize()).isEqualTo(10);
+
+
+
+    }
+
+
 
     public static Loan createLoan(){
 
