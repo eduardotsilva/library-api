@@ -1,9 +1,12 @@
 package com.eduardo.libraryapi.service.impl;
 
+import com.eduardo.libraryapi.api.dto.LoanFilterDTO;
 import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.model.repository.LoanRepository;
 import com.eduardo.libraryapi.service.LoanService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
@@ -32,5 +35,10 @@ public class LoanServiceImpl implements LoanService {
     public Loan  update(Loan loan) {
 
         return  repository.save(loan);
+    }
+
+    @Override
+    public Page<Loan> find(LoanFilterDTO filterDTO, Pageable pageable) {
+        return null;
     }
 }

@@ -1,12 +1,16 @@
 package com.eduardo.libraryapi.api.resource;
 
 import com.eduardo.libraryapi.api.dto.LoanDTO;
+import com.eduardo.libraryapi.api.dto.LoanFilterDTO;
 import com.eduardo.libraryapi.api.dto.ReturnedLoanDTO;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
 import com.eduardo.libraryapi.service.LoanService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -49,4 +53,14 @@ public class LoanController {
         loan.setReturned(dto.getReturned());
         service.update(loan);
     }
+
+
+    @GetMapping
+    public Page<LoanDTO> find(LoanFilterDTO dto, Pageable pageable){
+
+        Page<Loan> result = service.find(dto, pageable);
+
+        return null;
+    }
+
 }
