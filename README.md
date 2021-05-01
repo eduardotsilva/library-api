@@ -17,7 +17,7 @@
 4. Criar testes unitários e de integração com JUnit 5, AssertJ, Mockito:heavy_check_mark:
 5. Desenvolver uma arquitetura de aplicação em camadas:heavy_check_mark:
 6. Documentar a API's com Swagger
-7. Criar serviço de agendamento de tarefas e envio de emails com o Java
+7. Criar serviço de agendamento de tarefas e envio de emails com o Java:heavy_check_mark:
 8. Configuração de Deploy Contínuo
 9. Cobertura de Código
 10. Gerar o build da aplicação e fazer o deploy de sua API na nuvem
