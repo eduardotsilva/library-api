@@ -19,14 +19,14 @@ public class LibraryApiApplication {
     @Autowired
     private EmailService emailService;
 
-    @Bean
-    public CommandLineRunner runner() {
-        return args -> {
-            List<String> emails = Arrays.asList("library-api-144076@inbox.mailtrap.io");
-            emailService.sendMails("Testando serviço de emails", emails);
-            System.out.println("EMAILS ENVIADOS");
-        };
-    }
+//    @Bean
+//    public CommandLineRunner runner() {
+//        return args -> {
+//            List<String> emails = Arrays.asList("library-api-144076@inbox.mailtrap.io");
+//            emailService.sendMails("Testando serviço de emails", emails);
+//            System.out.println("EMAILS ENVIADOS");
+//        };
+//    }
 
     @Bean
     public ModelMapper modelMapper() {
