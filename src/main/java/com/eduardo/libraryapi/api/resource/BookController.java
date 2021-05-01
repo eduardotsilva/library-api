@@ -6,6 +6,10 @@ import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
 import com.eduardo.libraryapi.service.LoanService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +26,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
-
+@Api("Book API")
 public class BookController {
 
 
@@ -35,6 +39,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Create a book")
     public BookDTO create (@RequestBody @Validated BookDTO dto){
 
         Book entity = modelMapper.map(dto,Book.class);
@@ -44,6 +49,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Obtains a book details by id")
     public BookDTO get(@PathVariable Long id){
 
         return service
@@ -55,6 +61,10 @@ public class BookController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation("Delete a book")
+    @ApiResponses({
+            @ApiResponse(code = 204,message = "Book deleted")
+    })
     public void delete(@PathVariable Long id){
         Book book = service.getById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -62,6 +72,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation("Update a book")
     public BookDTO update(@PathVariable Long id, BookDTO dto){
        return  service.getById(id).map( book -> {
             book.setAuthor(dto.getAuthor());
@@ -84,6 +95,7 @@ public class BookController {
     }
 
     @GetMapping("{id}/loans")
+    @ApiOperation("Obtains book and loans")
     public Page<LoanDTO> loansByBook(@PathVariable Long id, Pageable pageable  ){
         Book book = service.getById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
