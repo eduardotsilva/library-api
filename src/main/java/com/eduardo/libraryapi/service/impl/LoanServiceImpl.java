@@ -2,14 +2,17 @@ package com.eduardo.libraryapi.service.impl;
 
 import com.eduardo.libraryapi.api.dto.LoanFilterDTO;
 import com.eduardo.libraryapi.exception.BusinessException;
+import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.model.repository.LoanRepository;
 import com.eduardo.libraryapi.service.LoanService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class LoanServiceImpl implements LoanService {
     private LoanRepository repository;
 
@@ -40,5 +43,10 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public Page<Loan> find(LoanFilterDTO filterDTO, Pageable pageable) {
         return repository.findByBookIsbnOrCustomer(filterDTO.getIsbn(),filterDTO.getCustomer(),pageable);
+    }
+
+    @Override
+    public Page<Loan> getLoansByBook(Book book, Pageable pageable) {
+        return repository.findByBook(book, pageable);
     }
 }
