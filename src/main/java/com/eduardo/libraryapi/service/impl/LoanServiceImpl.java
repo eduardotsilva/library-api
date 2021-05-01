@@ -6,6 +6,7 @@ import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.model.repository.LoanRepository;
 import com.eduardo.libraryapi.service.LoanService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,10 @@ import java.util.Optional;
 
 @Service
 public class LoanServiceImpl implements LoanService {
+
     private LoanRepository repository;
 
     public LoanServiceImpl(LoanRepository repository) {
-
         this.repository = repository;
     }
 

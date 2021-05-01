@@ -3,6 +3,8 @@ package com.eduardo.libraryapi.service;
 import com.eduardo.libraryapi.api.dto.LoanFilterDTO;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
