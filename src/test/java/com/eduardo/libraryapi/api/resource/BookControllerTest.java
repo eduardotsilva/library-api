@@ -3,6 +3,7 @@ package com.eduardo.libraryapi.api.resource;
 import com.eduardo.libraryapi.api.dto.BookDTO;
 import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Book;
+import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
@@ -25,7 +26,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -53,6 +56,14 @@ public class BookControllerTest {
     public void createBookTest() throws Exception{
 
         BookDTO dto = createNewBook();
+
+
+        Loan loan = Loan.builder().id(1L).customer("Fulamo").build();
+
+        List<Loan> list = new ArrayList<Loan>();
+
+        list.add(loan);
+
         Book savedBook = Book.builder().id(10L).author("Arthur").title("As aventuras").isbn("001").build();
 
         BDDMockito.given(service.save(Mockito.any(Book.class))).willReturn(savedBook);

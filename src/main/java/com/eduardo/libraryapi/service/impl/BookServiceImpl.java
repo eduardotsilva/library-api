@@ -4,6 +4,7 @@ import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.repository.BookRepository;
 import com.eduardo.libraryapi.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @Service
 public class BookServiceImpl implements BookService {
 
+    @Autowired
     private BookRepository repository;
 
     public BookServiceImpl(BookRepository repository) {

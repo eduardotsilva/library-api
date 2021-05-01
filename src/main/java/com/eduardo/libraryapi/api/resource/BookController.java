@@ -2,24 +2,18 @@ package com.eduardo.libraryapi.api.resource;
 
 import com.eduardo.libraryapi.api.dto.BookDTO;
 import com.eduardo.libraryapi.api.dto.LoanDTO;
-import com.eduardo.libraryapi.api.exception.ApiErros;
 import com.eduardo.libraryapi.model.entity.Book;
-import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
 import com.eduardo.libraryapi.service.LoanService;
-import com.eduardo.libraryapi.service.impl.LoanServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,12 +22,16 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
-@RequiredArgsConstructor
+
 public class BookController {
 
-    private final BookService service;
-    private final ModelMapper modelMapper;
-    private final LoanService loanService;
+
+    @Autowired
+    private BookService service;
+    private LoanService loanService;
+    @Autowired
+    private ModelMapper modelMapper;
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
