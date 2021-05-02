@@ -10,6 +10,7 @@
 
 # library-api
 [![Build Status](https://travis-ci.com/eduardotsilva/library-api.svg?branch=main)](https://travis-ci.com/eduardotsilva/library-api)
+[![codecov](https://codecov.io/gh/eduardotsilva/library-api/branch/main/graph/badge.svg?token=5WB08YYSW0)](https://codecov.io/gh/eduardotsilva/library-api)
 
 ## Conteúdo
 1. Criar aplicações do zero com Spring Boot:heavy_check_mark:
@@ -20,9 +21,9 @@
 6. Documentar a API's com Swagger:heavy_check_mark:
 7. Criar serviço de agendamento de tarefas e envio de emails com o Java:heavy_check_mark:
 8. Configuração de Deploy Contínuo:heavy_check_mark:
-9. Cobertura de Código
+9. Cobertura de Código:heavy_check_mark:
 10. Gerar o build da aplicação e fazer o deploy de sua API na nuvem
-11. Integração do Github com Codecov e Travis CI
+11. Integração do Github com Codecov e Travis CI:heavy_check_mark:
 
 ## Referências:
 Esse projeto foi desenvolvido durante o curso: [Design de API's RestFul com Spring Boot, TDD e o novo JUnit5
