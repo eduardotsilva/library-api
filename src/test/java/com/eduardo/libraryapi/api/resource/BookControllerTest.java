@@ -5,6 +5,8 @@ import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
+import com.eduardo.libraryapi.service.EmailService;
+import com.eduardo.libraryapi.service.LoanService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -49,6 +51,12 @@ public class BookControllerTest {
 
     @MockBean
     BookService service;
+
+    @MockBean
+    LoanService loanService;
+
+    @MockBean
+    EmailService emailService;
 
     @Test
     @DisplayName("DEVE criar uma livro com sucesso.")

@@ -10,10 +10,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,14 +30,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/books")
 @Api("Book API")
 @Slf4j
+@RequiredArgsConstructor
 public class BookController {
 
 
-    @Autowired
-    private BookService service;
-    private LoanService loanService;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final BookService service;
+    private final LoanService loanService;
+    private final ModelMapper modelMapper;
 
 
     @PostMapping
@@ -78,7 +78,7 @@ public class BookController {
 
     @PutMapping("/{id}")
     @ApiOperation("Update a book")
-    public BookDTO update(@PathVariable Long id, BookDTO dto){
+    public BookDTO update(@PathVariable Long id, @RequestBody @Valid BookDTO dto){
         log.info(" updating book if id: {} ", id);
 
        return  service.getById(id).map( book -> {
