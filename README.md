@@ -16,12 +16,13 @@
 3. Desenvolver utilizando técnicas TDD e BDD:heavy_check_mark:
 4. Criar testes unitários e de integração com JUnit 5, AssertJ, Mockito:heavy_check_mark:
 5. Desenvolver uma arquitetura de aplicação em camadas:heavy_check_mark:
-6. Documentar a API's com Swagger
+6. Documentar a API's com Swagger:heavy_check_mark:
 7. Criar serviço de agendamento de tarefas e envio de emails com o Java:heavy_check_mark:
-8. Configuração de Deploy Contínuo:heavy_check_mark: [![Build Status](https://travis-ci.com/eduardotsilva/library-api.svg?branch=main)](https://travis-ci.com/eduardotsilva/library-api)
-9. Cobertura de Código
+8. Configuração de Deploy Contínuo:heavy_check_mark:
+9. Cobertura de Código:heavy_check_mark:
 10. Gerar o build da aplicação e fazer o deploy de sua API na nuvem
 11. Integração do Github com Codecov e Travis CI
+[![Build Status](https://travis-ci.com/eduardotsilva/library-api.svg?branch=main)](https://travis-ci.com/eduardotsilva/library-api)
 
 ## Referências:
 Esse projeto foi desenvolvido durante o curso: [Design de API's RestFul com Spring Boot, TDD e o novo JUnit5
