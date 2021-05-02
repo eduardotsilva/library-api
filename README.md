@@ -27,5 +27,5 @@
 Esse projeto foi desenvolvido durante o curso: [Design de API's RestFul com Spring Boot, TDD e o novo JUnit5
 ](https://www.udemy.com/course/design-de-apis-restful-com-tdd-spring-boot-e-junit-5/) 
 
-
+[![Build Status](https://travis-ci.com/eduardotsilva/library-api.svg?branch=main)](https://travis-ci.com/eduardotsilva/library-api)
 ![alt Oracle Certified Associate, Java SE 8 Programmer](https://images.credly.com/size/340x340/images/a9848abf-f8bd-474d-a9b4-6086da11a916/Oracle_Associates_Badge__1_.png)
