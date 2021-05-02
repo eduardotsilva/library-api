@@ -3,12 +3,15 @@ package com.eduardo.libraryapi.model.repository;
 
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
+import com.eduardo.libraryapi.service.EmailService;
+import com.eduardo.libraryapi.service.LoanService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
@@ -30,6 +33,10 @@ public class LoanRepositoryTest {
 
     @Autowired
     LoanRepository repository;
+
+    @MockBean
+    EmailService emailService;
+
 
     @Test
     @DisplayName("DEVE retornar que o LIVRO ainda não foi devolvido do empréstimo")

@@ -7,6 +7,7 @@ import com.eduardo.libraryapi.exception.BusinessException;
 import com.eduardo.libraryapi.model.entity.Book;
 import com.eduardo.libraryapi.model.entity.Loan;
 import com.eduardo.libraryapi.service.BookService;
+import com.eduardo.libraryapi.service.EmailService;
 import com.eduardo.libraryapi.service.LoanService;
 import com.eduardo.libraryapi.service.LoanServiceTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,6 +53,8 @@ public class LoanControllerTest {
     private BookService bookService;
     @MockBean
     private LoanService loanService;
+    @MockBean
+    private EmailService emailService;
 
     @Test
     @DisplayName("DEVE realizar um emprestimo de livro")

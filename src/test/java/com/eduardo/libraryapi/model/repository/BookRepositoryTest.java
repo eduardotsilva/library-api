@@ -1,12 +1,15 @@
 package com.eduardo.libraryapi.model.repository;
 
 import com.eduardo.libraryapi.model.entity.Book;
+import com.eduardo.libraryapi.service.EmailService;
+import com.eduardo.libraryapi.service.LoanService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -24,6 +27,12 @@ public class BookRepositoryTest {
 
     @Autowired
     BookRepository repository;
+
+    @MockBean
+    EmailService emailService;
+
+    @MockBean
+    LoanService loanService;
 
     @Test
     @DisplayName("DEVE retornar TRUE quando existir um livro na base com ibs informado")
