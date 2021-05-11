@@ -10,14 +10,24 @@
 	</parent>
 	<groupId>com.eduardo</groupId>
 	<artifactId>library-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>library-api</name>
 	<description>API do projeto de bibliotecas</description>
 	<packaging>jar</packaging>
+<!--	<packaging>war</packaging>-->
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
+
+<!--		Produção-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--			<scope>provided</scope>-->
+<!--		</dependency>-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
