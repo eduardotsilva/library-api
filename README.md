@@ -25,6 +25,9 @@
 10. Gerar o build da aplicação e fazer o deploy de sua API na nuvem:heavy_check_mark:
 11. Integração do Github com Codecov e Travis CI:heavy_check_mark:
 
+## Complemento
+1. Dockerfile
+
 ## Referências:
 Esse projeto foi desenvolvido durante o curso: [Design de API's RestFul com Spring Boot, TDD e o novo JUnit5
 ](https://www.udemy.com/course/design-de-apis-restful-com-tdd-spring-boot-e-junit-5/) 
